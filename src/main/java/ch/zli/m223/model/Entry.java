@@ -7,6 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "ENTRY")
 public class Entry {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,12 @@ public class Entry {
 
   @Column(nullable = false)
   private LocalDateTime checkOut;
+  
+  @ManyToOne()
+  @JoinColumn(name = "category_id", nullable = false)
+  private Category category;
 
+  //getter and setter
   public Long getId() {
     return id;
   }
