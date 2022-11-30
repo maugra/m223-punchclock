@@ -6,7 +6,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-
 import ch.zli.m223.model.Entry;
 
 @ApplicationScoped
@@ -25,10 +24,13 @@ public class EntryService {
         return query.getResultList();
     }
 
-    public void delete(Entry entry) {
+    @Transactional
+    public void delete(Long id) {
+        Entry entry = entityManager.find(Entry.class, id);
+        entityManager.remove(entry);
     }
-
+    @Transactional
     public Entry update(Entry entry) {
-        return null;
+        return entityManager.merge(entry);
     }
 }
