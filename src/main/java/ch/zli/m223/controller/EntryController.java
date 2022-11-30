@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -37,5 +38,27 @@ public class EntryController {
     public Entry create(Entry entry) {
        return entryService.createEntry(entry);
     }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(
+        summary = "deletes an entry",
+        description = "deletes the specified Entry"
+    )
+    public void delete(Entry entry){
+        entryService.delete(entry);
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+        summary = "edits an existing entry",
+        description = "edits the specified entry"
+    )
+    public Entry update(Entry entry){
+        return entryService.update(entry);
+    }
+    
 
 }
