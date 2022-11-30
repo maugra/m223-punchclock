@@ -1,8 +1,5 @@
 package ch.zli.m223.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import javax.persistence.*;
