@@ -13,14 +13,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
-import ch.zli.m223.model.Tags;
+import ch.zli.m223.model.Tag;
 
 import ch.zli.m223.service.TagService;
 
 @Path("/tags")
-@Tag(name = "Entries", description = "Handling of entries")
+@org.eclipse.microprofile.openapi.annotations.tags.Tag
+(name = "Entries", description = "Handling of entries")
 public class TagController {
 
     @Inject
@@ -32,7 +31,7 @@ public class TagController {
         summary = "Index all tags.",
         description = "Returns a list of all tags."
     )
-    public List<Tags> index() {
+    public List<Tag> index() {
         return tagService.findAll();
     }
 
@@ -43,7 +42,7 @@ public class TagController {
         summary = "Creates a new Category.",
         description = "Creates a new Category and returns the newly added entry."
     )
-    public Tags create(Tags tag) {
+    public Tag create(Tag tag) {
        return tagService.createTag(tag);
     }
 
@@ -65,9 +64,7 @@ public class TagController {
         summary = "edits an existing entry",
         description = "edits the specified entry"
     )
-    public Tags update(Tags tag){
+    public Tag update(Tag tag){
         return tagService.update(tag);
     }
-    
-
 }
