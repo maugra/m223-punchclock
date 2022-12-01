@@ -26,7 +26,7 @@ public class Entry {
   private Category category;
 
   @ManyToMany(mappedBy = "entryTags")
-  private Set<Tag> tags;
+  private Set<Tags> tags;
 
   //getter and setter
   public Long getId() {
