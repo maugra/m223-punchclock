@@ -4,7 +4,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.Set;
 
-import javax.persistence.*;public class Tag {
+import javax.persistence.*;public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(readOnly = true)
