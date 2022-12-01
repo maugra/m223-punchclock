@@ -5,6 +5,7 @@ import javax.persistence.*;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "ENTRY")
@@ -23,6 +24,9 @@ public class Entry {
   @ManyToOne()
   @JoinColumn(name = "category_id", nullable = false)
   private Category category;
+
+  @ManyToMany(mappedBy = "entryTags")
+  private Set<Tag> tags;
 
   //getter and setter
   public Long getId() {
