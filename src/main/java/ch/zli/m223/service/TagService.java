@@ -6,30 +6,30 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import ch.zli.m223.model.Tags;
+import ch.zli.m223.model.Tag;
 
 public class TagService {
     @Inject
     private EntityManager entityManager;
 
     @Transactional
-    public Tags createTag(Tags tag) {
+    public Tag createTag(Tag tag) {
         entityManager.persist(tag);
         return tag;
     }
 
-    public List<Tags> findAll() {
-        var query = entityManager.createQuery("FROM Entry", Tags.class);
+    public List<Tag> findAll() {
+        var query = entityManager.createQuery("FROM Entry", Tag.class);
         return query.getResultList();
     }
 
     @Transactional
     public void delete(Long id) {
-        Tags entry = entityManager.find(Tags.class, id);
+        Tag entry = entityManager.find(Tag.class, id);
         entityManager.remove(entry);
     }
     @Transactional
-    public Tags update(Tags tag) {
+    public Tag update(Tag tag) {
         return entityManager.merge(tag);
     }
 }
