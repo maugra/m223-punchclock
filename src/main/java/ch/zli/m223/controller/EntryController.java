@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -28,7 +29,7 @@ public class EntryController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-        summary = "Index all Entries.",
+        summary = "Index all entries.", 
         description = "Returns a list of all entries."
     )
     public List<Entry> index() {
@@ -39,7 +40,7 @@ public class EntryController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(
-        summary = "Creates a new entry.",
+        summary = "Creates a new entry.", 
         description = "Creates a new entry and returns the newly added entry."
     )
     public Entry create(Entry entry) {
@@ -48,25 +49,22 @@ public class EntryController {
 
     @Path("/{id}")
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Operation(
-        summary = "deletes an entry",
-        description = "deletes the specified Entry"
+        summary = "Deletes an entry.",
+        description = "Deletes an entry by its id."
     )
-    public void delete(Long id){
-        entryService.delete(id);
+    public void delete(@PathParam("id") Long id) {
+        entryService.deleteEntry(id);
     }
 
+    @Path("/{id}")
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-        summary = "edits an existing entry",
-        description = "edits the specified entry"
+        summary = "Updates an entry.",
+        description = "Updates an entry by its id."
     )
-    public Entry update(Entry entry){
-        return entryService.update(entry);
+    public Entry update(@PathParam("id") Long id, Entry entry) {
+        return entryService.updateEntry(id, entry);
     }
-    
 
 }

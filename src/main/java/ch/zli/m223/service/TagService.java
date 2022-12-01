@@ -5,7 +5,6 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import ch.zli.m223.model.Tag;
@@ -22,8 +21,8 @@ public class TagService {
 
     @Transactional
     public void deleteTag(Long id) {
-        Tag tag = entityManager.find(Tag.class, id);
-        entityManager.remove(tag);
+        var entity = entityManager.find(Tag.class, id);
+        entityManager.remove(entity);
     }
 
     @Transactional
@@ -33,7 +32,7 @@ public class TagService {
     }
 
     public List<Tag> findAll() {
-        TypedQuery<Tag> query = entityManager.createQuery("FROM Tag", Tag.class);
+        var query = entityManager.createQuery("FROM Tag", Tag.class);
         return query.getResultList();
     }
 }

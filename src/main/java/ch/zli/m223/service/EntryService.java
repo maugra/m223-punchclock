@@ -5,7 +5,6 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import ch.zli.m223.model.Entry;
@@ -22,8 +21,8 @@ public class EntryService {
 
     @Transactional
     public void deleteEntry(Long id) {
-        Entry entry = entityManager.find(Entry.class, id);
-        entityManager.remove(entry);
+        var entity = entityManager.find(Entry.class, id);
+        entityManager.remove(entity);
     }
 
     @Transactional
@@ -33,7 +32,7 @@ public class EntryService {
     }
 
     public List<Entry> findAll() {
-        TypedQuery<Entry> query = entityManager.createQuery("FROM Entry", Entry.class);
+        var query = entityManager.createQuery("FROM Entry", Entry.class);
         return query.getResultList();
     }
 }
